@@ -16,7 +16,7 @@ class AdminSeeder extends Seeder
         $admins = [
             [
                 'name' => 'Admin User',
-                'email' => 'admin@laramedicare.com',
+                'email' => 'admin@hospitally.com',
                 'password' => Hash::make('admin123'),
                 'phone' => '0321-1234567',
                 'cnic' => '42101-1234567-1',
@@ -27,7 +27,7 @@ class AdminSeeder extends Seeder
             ],
             [
                 'name' => 'Muhammad Bilal',
-                'email' => 'bilal.admin@laramedicare.com',
+                'email' => 'bilal.admin@hospitally.com',
                 'password' => Hash::make('admin123'),
                 'phone' => '0322-9876543',
                 'cnic' => '42101-9876543-2',

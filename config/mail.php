@@ -77,8 +77,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'noreply@laramedicare.com'),
-        'name' => env('MAIL_FROM_NAME', 'LaraMediCare'),
+        'address' => env('MAIL_FROM_ADDRESS', 'noreply@hospitally.com'),
+        'name' => env('MAIL_FROM_NAME', 'hospitally'),
     ],
 
 ];

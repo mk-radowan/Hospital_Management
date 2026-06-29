@@ -23,9 +23,9 @@ class AdminAuthController extends Controller
         $credentials['role'] = 'admin';
         $credentials['is_active'] = true;
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::guard('admin')->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended(route('admin.dashboard'));
+            return redirect()->route('admin.dashboard');
         }
 
         return back()->withErrors([
@@ -35,8 +35,7 @@ class AdminAuthController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::logout();
-        $request->session()->invalidate();
+        Auth::guard('admin')->logout();
         $request->session()->regenerateToken();
         return redirect('/');
     }

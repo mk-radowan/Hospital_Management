@@ -3,6 +3,7 @@
 // routes/web.php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\PatientAuthController;
@@ -40,39 +41,36 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Patient Authentication Routes
 Route::prefix('patient')->name('patient.')->group(function () {
-    Route::middleware('guest')->group(function () {
-        Route::get('login', [PatientAuthController::class, 'showLoginForm'])->name('login');
-        Route::post('login', [PatientAuthController::class, 'login']);
-        Route::get('register', [PatientAuthController::class, 'showRegisterForm'])->name('register');
-        Route::post('register', [PatientAuthController::class, 'register']);
-    });
+    Route::get('login', [PatientAuthController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [PatientAuthController::class, 'login']);
+    Route::get('register', [PatientAuthController::class, 'showRegisterForm'])->name('register');
+    Route::post('register', [PatientAuthController::class, 'register']);
     
+    Route::get('logout', [PatientAuthController::class, 'logout']);
     Route::post('logout', [PatientAuthController::class, 'logout'])->name('logout');
 });
 
 // Doctor Authentication Routes
 Route::prefix('doctor')->name('doctor.')->group(function () {
-    Route::middleware('guest')->group(function () {
-        Route::get('login', [DoctorAuthController::class, 'showLoginForm'])->name('login');
-        Route::post('login', [DoctorAuthController::class, 'login']);
-    });
+    Route::get('login', [DoctorAuthController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [DoctorAuthController::class, 'login']);
     
+    Route::get('logout', [DoctorAuthController::class, 'logout']);
     Route::post('logout', [DoctorAuthController::class, 'logout'])->name('logout');
 });
 
 // Admin Authentication Routes
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::middleware('guest')->group(function () {
-        Route::get('login', [AdminAuthController::class, 'showLoginForm'])->name('login');
-        Route::post('login', [AdminAuthController::class, 'login']);
-    });
+    Route::get('login', [AdminAuthController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [AdminAuthController::class, 'login']);
     
+    Route::get('logout', [AdminAuthController::class, 'logout']);
     Route::post('logout', [AdminAuthController::class, 'logout'])->name('logout');
 });
 
 // Replace your AJAX routes section in routes/web.php with this FINAL corrected version:
 
-Route::middleware(['auth', 'role:patient'])->prefix('ajax')->name('ajax.')->group(function () {
+Route::middleware(['auth:patient', 'role:patient'])->prefix('ajax')->name('ajax.')->group(function () {
     
     // Get doctor details for appointment booking
     // Changed parameter name to avoid automatic model binding
@@ -194,7 +192,7 @@ Route::middleware(['auth', 'role:patient'])->prefix('ajax')->name('ajax.')->grou
 // PATIENT ROUTES
 // ====================================
 
-Route::prefix('patient')->name('patient.')->middleware(['auth', 'role:patient'])->group(function () {
+Route::prefix('patient')->name('patient.')->middleware(['auth:patient', 'role:patient'])->group(function () {
     // Dashboard
     Route::get('dashboard', [PatientDashboardController::class, 'index'])->name('dashboard');
     
@@ -218,7 +216,7 @@ Route::prefix('patient')->name('patient.')->middleware(['auth', 'role:patient'])
 // DOCTOR ROUTES
 // ====================================
 
-Route::prefix('doctor')->name('doctor.')->middleware(['auth', 'role:doctor'])->group(function () {
+Route::prefix('doctor')->name('doctor.')->middleware(['auth:doctor', 'role:doctor'])->group(function () {
     // Dashboard
     Route::get('dashboard', [DoctorDashboardController::class, 'index'])->name('dashboard');
     
@@ -237,7 +235,7 @@ Route::prefix('doctor')->name('doctor.')->middleware(['auth', 'role:doctor'])->g
 // ADMIN ROUTES
 // ====================================
 
-Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth:admin', 'role:admin'])->group(function () {
     // Dashboard
     Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     
@@ -289,9 +287,16 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
 // ====================================
 
 // Redirect users to appropriate dashboards if they access wrong URLs
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:admin,doctor,patient')->group(function () {
     Route::get('/dashboard', function () {
-        $user = auth()->user();
+        $user = Auth::guard('admin')->user()
+            ?? Auth::guard('doctor')->user()
+            ?? Auth::guard('patient')->user();
+
+        if (!$user) {
+            return redirect()->route('home');
+        }
+
         return match($user->role) {
             'admin' => redirect()->route('admin.dashboard'),
             'doctor' => redirect()->route('doctor.dashboard'),

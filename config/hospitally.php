@@ -8,7 +8,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'app_name' => 'LaraMediCare',
+    'app_name' => 'Hospitally',
     'app_description' => 'Hospital & Clinic Management System for Pakistan',
     
     /*

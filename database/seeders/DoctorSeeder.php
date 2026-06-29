@@ -18,7 +18,7 @@ class DoctorSeeder extends Seeder
             [
                 'user' => [
                     'name' => 'Dr. Ayesha Khan',
-                    'email' => 'ayesha.khan@laramedicare.com',
+                    'email' => 'ayesha.khan@hospitally.com',
                     'password' => Hash::make('doctor123'),
                     'phone' => '0300-1234567',
                     'cnic' => '42201-1234567-3',
@@ -42,7 +42,7 @@ class DoctorSeeder extends Seeder
             [
                 'user' => [
                     'name' => 'Dr. Ahmed Raza',
-                    'email' => 'ahmed.raza@laramedicare.com',
+                    'email' => 'ahmed.raza@hospitally.com',
                     'password' => Hash::make('doctor123'),
                     'phone' => '0301-9876543',
                     'cnic' => '42201-9876543-4',
@@ -66,7 +66,7 @@ class DoctorSeeder extends Seeder
             [
                 'user' => [
                     'name' => 'Dr. Fatima Malik',
-                    'email' => 'fatima.malik@laramedicare.com',
+                    'email' => 'fatima.malik@hospitally.com',
                     'password' => Hash::make('doctor123'),
                     'phone' => '0302-5555555',
                     'cnic' => '42201-5555555-5',
@@ -90,7 +90,7 @@ class DoctorSeeder extends Seeder
             [
                 'user' => [
                     'name' => 'Dr. Zain Ali',
-                    'email' => 'zain.ali@laramedicare.com',
+                    'email' => 'zain.ali@hospitally.com',
                     'password' => Hash::make('doctor123'),
                     'phone' => '0303-7777777',
                     'cnic' => '42201-7777777-6',
@@ -114,7 +114,7 @@ class DoctorSeeder extends Seeder
             [
                 'user' => [
                     'name' => 'Dr. Sadia Hassan',
-                    'email' => 'sadia.hassan@laramedicare.com',
+                    'email' => 'sadia.hassan@hospitally.com',
                     'password' => Hash::make('doctor123'),
                     'phone' => '0304-8888888',
                     'cnic' => '42201-8888888-7',
@@ -138,7 +138,7 @@ class DoctorSeeder extends Seeder
             [
                 'user' => [
                     'name' => 'Dr. Hassan Mahmood',
-                    'email' => 'hassan.mahmood@laramedicare.com',
+                    'email' => 'hassan.mahmood@hospitally.com',
                     'password' => Hash::make('doctor123'),
                     'phone' => '0305-3333333',
                     'cnic' => '42201-3333333-8',

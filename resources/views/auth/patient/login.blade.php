@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Patient Login - LaraMediCare')
+@section('title', 'Patient Login - Hospitally')
 
 @section('content')
 <div class="container mt-5">

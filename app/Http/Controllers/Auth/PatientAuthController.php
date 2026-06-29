@@ -48,10 +48,10 @@ class PatientAuthController extends Controller
             'user_id' => $user->id,
         ]);
 
-        Auth::login($user);
+        Auth::guard('patient')->login($user);
 
         return redirect()->route('patient.dashboard')
-            ->with('success', 'Registration successful! Welcome to LaraMediCare.');
+            ->with('success', 'Registration successful! Welcome to Hospitally.');
     }
 
     public function login(Request $request)
@@ -64,9 +64,9 @@ class PatientAuthController extends Controller
         $credentials['role'] = 'patient';
         $credentials['is_active'] = true;
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::guard('patient')->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended(route('patient.dashboard'));
+            return redirect()->route('patient.dashboard');
         }
 
         return back()->withErrors([
@@ -76,8 +76,7 @@ class PatientAuthController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::logout();
-        $request->session()->invalidate();
+        Auth::guard('patient')->logout();
         $request->session()->regenerateToken();
         return redirect('/');
     }

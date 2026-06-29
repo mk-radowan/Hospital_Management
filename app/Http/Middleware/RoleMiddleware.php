@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class RoleMiddleware
@@ -15,11 +16,21 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next, string $role): Response
     {
-        if (!auth()->check()) {
+        $guards = ['admin', 'doctor', 'patient', 'web'];
+        $authenticatedGuard = null;
+
+        foreach ($guards as $guard) {
+            if (Auth::guard($guard)->check()) {
+                $authenticatedGuard = $guard;
+                break;
+            }
+        }
+
+        if (!$authenticatedGuard) {
             return redirect()->route('home');
         }
 
-        $user = auth()->user();
+        $user = Auth::guard($authenticatedGuard)->user();
 
         // Check if user has the required role
         if ($user->role !== $role) {
@@ -34,7 +45,7 @@ class RoleMiddleware
 
         // Check if user is active
         if (!$user->is_active) {
-            auth()->logout();
+            Auth::guard($authenticatedGuard)->logout();
             return redirect()->route('home')->with('error', 'Your account has been deactivated.');
         }
 

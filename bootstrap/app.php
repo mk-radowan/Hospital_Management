@@ -13,7 +13,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         // Global middleware
-        $middleware->web(append: [
+        $middleware->web(prepend: [
+           \App\Http\Middleware\SetAuthGuardFromRoute::class,
+        ], append: [
            // \App\Http\Middleware\HandleInertiaRequests::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ]);
@@ -30,7 +32,11 @@ return Application::configure(basePath: dirname(__DIR__))
         
         // Override the auth middleware redirect
         $middleware->redirectUsersTo(function ($request) {
-            $user = $request->user();
+            $user = $request->user('admin')
+                ?? $request->user('doctor')
+                ?? $request->user('patient')
+                ?? $request->user();
+
             return match($user?->role) {
                 'admin' => '/admin/dashboard',
                 'doctor' => '/doctor/dashboard',

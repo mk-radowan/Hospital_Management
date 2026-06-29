@@ -21,7 +21,11 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                $user = Auth::user();
+                $user = Auth::guard($guard)->user();
+
+                if (!$user) {
+                    return redirect('/');
+                }
                 
                 // Redirect authenticated users to their respective dashboards
                 return match($user->role) {

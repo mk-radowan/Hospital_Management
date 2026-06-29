@@ -24,12 +24,12 @@ class DoctorAuthController extends Controller
         $credentials['role'] = 'doctor';
         $credentials['is_active'] = true;
 
-        if (Auth::attempt($credentials, $request->filled('remember'))) {
+        if (Auth::guard('doctor')->attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
             
             // Check if doctor profile exists
-            if (!auth()->user()->doctor) {
-                Auth::logout();
+            if (!Auth::guard('doctor')->user()?->doctor) {
+                Auth::guard('doctor')->logout();
                 return back()->withErrors([
                     'email' => 'Doctor profile not found. Please contact administrator.',
                 ]);
@@ -46,8 +46,7 @@ class DoctorAuthController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::logout();
-        $request->session()->invalidate();
+        Auth::guard('doctor')->logout();
         $request->session()->regenerateToken();
         
         return redirect('/')->with('success', 'You have been logged out successfully.');

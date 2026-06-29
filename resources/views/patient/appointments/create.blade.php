@@ -3,7 +3,7 @@
 ?>
 @extends('layouts.dashboard')
 
-@section('title', 'Book Appointment - LaraMediCare')
+@section('title', 'Book Appointment - Hospitally')
 
 @section('sidebar')
 <nav class="nav nav-pills flex-column">

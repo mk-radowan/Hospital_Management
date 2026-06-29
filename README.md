@@ -1,4 +1,4 @@
-# 🏥 LaraMediCare - Hospital Management System
+# 🏥 Hospitally - Hospital Management System
 
 <div align="center">
 
@@ -35,9 +35,9 @@
 
 ## 🎯 About
 
-**LaraMediCare** is a powerful, user-friendly Hospital Management System designed to streamline healthcare operations. Built with Laravel 11+ and Bootstrap 5, it provides separate portals for Patients, Doctors, and Administrators to manage appointments, prescriptions, and patient care efficiently.
+**Hospitally** is a powerful, user-friendly Hospital Management System designed to streamline healthcare operations. Built with Laravel 11+ and Bootstrap 5, it provides separate portals for Patients, Doctors, and Administrators to manage appointments, prescriptions, and patient care efficiently.
 
-### 🌟 Why LaraMediCare?
+### 🌟 Why Hospitally?
 
 - ✅ **Easy to Use** - Clean, intuitive interface for all user types
 - ✅ **Secure** - Role-based authentication with proper authorization
@@ -121,8 +121,8 @@ Before you begin, ensure you have the following installed:
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/yourusername/laramedicare.git
-   cd laramedicare
+   git clone https://github.com/yourusername/hospitally.git
+   cd hospitally
    ```
 
 2. **Install Dependencies**
@@ -140,7 +140,7 @@ Before you begin, ensure you have the following installed:
    DB_CONNECTION=mysql
    DB_HOST=127.0.0.1
    DB_PORT=3306
-   DB_DATABASE=laramedicare
+   DB_DATABASE=hospitally
    DB_USERNAME=root
    DB_PASSWORD=your_password
    ```
@@ -153,7 +153,7 @@ Before you begin, ensure you have the following installed:
 5. **Create Database**
    ```bash
    mysql -u root -p
-   CREATE DATABASE laramedicare;
+   CREATE DATABASE hospitally;
    exit;
    ```
 
@@ -217,22 +217,22 @@ After installation, the system comes pre-loaded with demo data:
 
 ### Admin Access
 ```
-Email: admin@laramedicare.com
+Email: admin@hospitally.com
 Password: password
 ```
 
 ### Doctor Access
 ```
 Dr. John Smith (Cardiology)
-Email: john@laramedicare.com
+Email: john@hospitally.com
 Password: password
 
 Dr. Sarah Johnson (Pediatrics)
-Email: sarah@laramedicare.com
+Email: sarah@hospitally.com
 Password: password
 
 Dr. Michael Brown (Orthopedics)
-Email: michael@laramedicare.com
+Email: michael@hospitally.com
 Password: password
 ```
 
@@ -430,7 +430,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ```
 MIT License
 
-Copyright (c) 2024 LaraMediCare
+Copyright (c) 2024 Hospitally
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -473,11 +473,11 @@ Give a ⭐️ if this project helped you! It helps others discover the project.
 
 <div align="center">
 
-[![GitHub Stars](https://img.shields.io/github/stars/wajihulqammar/laramedicare?style=social)](https://github.com/wajihulqammar/laramedicare/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/wajihulqammar/laramedicare?style=social)](https://github.com/wajihulqammar/laramedicare/network/members)
-[![GitHub Watchers](https://img.shields.io/github/watchers/wajihulqammar/laramedicare?style=social)](https://github.com/wajihulqammar/laramedicare/watchers)
+[![GitHub Stars](https://img.shields.io/github/stars/wajihulqammar/hospitally?style=social)](https://github.com/wajihulqammar/hospitally/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/wajihulqammar/hospitally?style=social)](https://github.com/wajihulqammar/hospitally/network/members)
+[![GitHub Watchers](https://img.shields.io/github/watchers/wajihulqammar/hospitally?style=social)](https://github.com/wajihulqammar/hospitally/watchers)
 
-**[⬆ back to top](#-laramedicare---hospital-management-system)**
+**[⬆ back to top](#-hospitally---hospital-management-system)**
 
 </div>
 
