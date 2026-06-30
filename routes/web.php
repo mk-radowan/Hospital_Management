@@ -27,6 +27,8 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\DoctorController as AdminDoctorController;
 use App\Http\Controllers\Admin\PatientController as AdminPatientController;
 use App\Http\Controllers\Admin\AppointmentController as AdminAppointmentController;
+use App\Http\Controllers\Admin\LegacyAdminController as AdminLegacyController;
+use App\Http\Controllers\Admin\PharmacyCategoryController as AdminPharmacyCategoryController;
 
 // ====================================
 // PUBLIC ROUTES
@@ -268,6 +270,18 @@ Route::prefix('admin')->name('admin.')->middleware(['auth:admin', 'role:admin'])
     Route::put('appointments/{appointment}', [AdminAppointmentController::class, 'update'])->name('appointments.update');
     Route::delete('appointments/{appointment}', [AdminAppointmentController::class, 'destroy'])->name('appointments.destroy');
     Route::patch('appointments/{appointment}/status', [AdminAppointmentController::class, 'updateStatus'])->name('appointments.update-status');
+
+    // Legacy admin modules
+    Route::get('legacy-features', [AdminLegacyController::class, 'index'])->name('legacy.index');
+
+    // Pharmacy Category Management
+    Route::get('pharmacy-categories', [AdminPharmacyCategoryController::class, 'index'])->name('pharmacy-categories.index');
+    Route::get('pharmacy-categories/create', [AdminPharmacyCategoryController::class, 'create'])->name('pharmacy-categories.create');
+    Route::post('pharmacy-categories', [AdminPharmacyCategoryController::class, 'store'])->name('pharmacy-categories.store');
+    Route::get('pharmacy-categories/{pharmacyCategory}/edit', [AdminPharmacyCategoryController::class, 'edit'])->name('pharmacy-categories.edit');
+    Route::put('pharmacy-categories/{pharmacyCategory}', [AdminPharmacyCategoryController::class, 'update'])->name('pharmacy-categories.update');
+    Route::delete('pharmacy-categories/{pharmacyCategory}', [AdminPharmacyCategoryController::class, 'destroy'])->name('pharmacy-categories.destroy');
+    Route::patch('pharmacy-categories/{pharmacyCategory}/toggle-status', [AdminPharmacyCategoryController::class, 'toggleStatus'])->name('pharmacy-categories.toggle-status');
     
     // Admin stats API for dashboard
     Route::get('/api/admin/stats', function () {
