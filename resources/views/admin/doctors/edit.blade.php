@@ -285,7 +285,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="consultation_fee" class="form-label">
-                                Consultation Fee (₨) <span class="required">*</span>
+                                Consultation Fee (Tk) <span class="required">*</span>
                             </label>
                             <input type="number" class="form-control @error('consultation_fee') is-invalid @enderror" 
                                    id="consultation_fee" name="consultation_fee" 

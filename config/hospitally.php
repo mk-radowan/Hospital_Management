@@ -18,9 +18,9 @@ return [
     */
 
     'currency' => [
-        'code' => 'PKR',
-        'symbol' => '₨',
-        'format' => '₨ %s',
+        'code' => 'Tk',
+        'symbol' => 'Tk',
+        'format' => 'Tk %s',
     ],
 
     'phone_format' => [
@@ -43,7 +43,7 @@ return [
         'slot_duration' => 30, // minutes
         'advance_booking_days' => 30, // how many days ahead patients can book
         'cancellation_hours' => 2, // minimum hours before appointment to cancel
-        'default_consultation_fee' => 1000, // PKR
+        'default_consultation_fee' => 1000, // Tk
     ],
 
     /*

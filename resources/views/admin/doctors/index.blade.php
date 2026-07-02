@@ -78,7 +78,7 @@
                                 <small class="text-muted">{{ $doctor->qualification }}</small>
                             </td>
                             <td>{{ $doctor->experience_years }} years</td>
-                            <td>₨{{ number_format($doctor->consultation_fee, 0) }}</td>
+                            <td>Tk {{ number_format($doctor->consultation_fee, 0) }}</td>
                             <td>
                                 @if($doctor->is_available && $doctor->user->is_active)
                                     <span class="badge bg-success">Active</span>

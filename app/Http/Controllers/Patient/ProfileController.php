@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Patient;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -15,13 +14,16 @@ class ProfileController extends Controller
 
     public function edit()
     {
-        return view('patient.profile.edit');
+        $user = auth()->user();
+        $patient = $user->getPatient();
+
+        return view('patient.profile.edit', compact('patient'));
     }
 
     public function update(Request $request)
     {
         $user = auth()->user();
-        $patient = $user->patient;
+        $patient = $user->getPatient();
 
         $request->validate([
             'name' => 'required|string|max:255',
@@ -37,10 +39,12 @@ class ProfileController extends Controller
 
         $user->update($request->only(['name', 'email', 'phone', 'address']));
         
-        $patient->update($request->only([
-            'date_of_birth', 'gender', 'blood_group', 
-            'emergency_contact', 'medical_history'
-        ]));
+        if ($patient) {
+            $patient->update($request->only([
+                'date_of_birth', 'gender', 'blood_group',
+                'emergency_contact', 'medical_history'
+            ]));
+        }
 
         return redirect()->route('patient.profile.show')
             ->with('success', 'Profile updated successfully!');

@@ -145,7 +145,7 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label for="consultation_fee" class="form-label">Consultation Fee (PKR) <span class="text-danger">*</span></label>
+                        <label for="consultation_fee" class="form-label">Consultation Fee (Tk) <span class="text-danger">*</span></label>
                         <input type="number" class="form-control @error('consultation_fee') is-invalid @enderror" 
                                id="consultation_fee" name="consultation_fee" value="{{ old('consultation_fee') }}" 
                                min="0" step="0.01" required>

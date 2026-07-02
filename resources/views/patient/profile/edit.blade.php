@@ -33,6 +33,11 @@
 @endsection
 
 @section('content')
+@php
+    $profile = $patient ?? auth()->user()->patient;
+    $selectedGender = strtolower(trim((string) old('gender', optional($profile)->gender)));
+    $selectedBloodGroup = strtoupper(trim((string) old('blood_group', optional($profile)->blood_group)));
+@endphp
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Edit Profile</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
@@ -82,7 +87,7 @@
                         <label for="date_of_birth" class="form-label">Date of Birth</label>
                         <input type="date" class="form-control @error('date_of_birth') is-invalid @enderror" 
                                id="date_of_birth" name="date_of_birth" 
-                               value="{{ old('date_of_birth', auth()->user()->patient && auth()->user()->patient->date_of_birth ? auth()->user()->patient->date_of_birth->format('Y-m-d') : '') }}">
+                               value="{{ old('date_of_birth', optional($profile)->date_of_birth ? optional($profile)->date_of_birth->format('Y-m-d') : '') }}">
                         @error('date_of_birth')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -94,9 +99,9 @@
                         <label for="gender" class="form-label">Gender</label>
                         <select class="form-select @error('gender') is-invalid @enderror" id="gender" name="gender">
                             <option value="">Select Gender</option>
-                            <option value="male" {{ old('gender', auth()->user()->patient && auth()->user()->patient->gender) === 'male' ? 'selected' : '' }}>Male</option>
-                            <option value="female" {{ old('gender', auth()->user()->patient && auth()->user()->patient->gender) === 'female' ? 'selected' : '' }}>Female</option>
-                            <option value="other" {{ old('gender', auth()->user()->patient && auth()->user()->patient->gender) === 'other' ? 'selected' : '' }}>Other</option>
+                            <option value="male" {{ $selectedGender === 'male' ? 'selected' : '' }}>Male</option>
+                            <option value="female" {{ $selectedGender === 'female' ? 'selected' : '' }}>Female</option>
+                            <option value="other" {{ $selectedGender === 'other' ? 'selected' : '' }}>Other</option>
                         </select>
                         @error('gender')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -108,7 +113,7 @@
                         <select class="form-select @error('blood_group') is-invalid @enderror" id="blood_group" name="blood_group">
                             <option value="">Select Blood Group</option>
                             @foreach(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'] as $bloodGroup)
-                                <option value="{{ $bloodGroup }}" {{ old('blood_group', auth()->user()->patient && auth()->user()->patient->blood_group) === $bloodGroup ? 'selected' : '' }}>
+                                <option value="{{ $bloodGroup }}" {{ $selectedBloodGroup === $bloodGroup ? 'selected' : '' }}>
                                     {{ $bloodGroup }}
                                 </option>
                             @endforeach
@@ -122,7 +127,7 @@
                         <label for="emergency_contact" class="form-label">Emergency Contact</label>
                         <input type="text" class="form-control @error('emergency_contact') is-invalid @enderror" 
                                id="emergency_contact" name="emergency_contact" 
-                               value="{{ old('emergency_contact', auth()->user()->patient && auth()->user()->patient->emergency_contact) }}"
+                               value="{{ old('emergency_contact', optional($profile)->emergency_contact) }}"
                                placeholder="03XX-XXXXXXX">
                         @error('emergency_contact')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -145,7 +150,7 @@
                 <label for="medical_history" class="form-label">Medical History</label>
                 <textarea class="form-control @error('medical_history') is-invalid @enderror" 
                           id="medical_history" name="medical_history" rows="4"
-                          placeholder="Any chronic conditions, allergies, previous surgeries, medications, etc.">{{ old('medical_history', auth()->user()->patient && auth()->user()->patient->medical_history) }}</textarea>
+                          placeholder="Any chronic conditions, allergies, previous surgeries, medications, etc.">{{ old('medical_history', optional($profile)->medical_history) }}</textarea>
                 @error('medical_history')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror

@@ -349,7 +349,7 @@
                             </div>
                         </td>
                         <td>
-                            <strong class="text-success">₨{{ number_format($appointment->consultation_fee, 0) }}</strong>
+                            <strong class="text-success">Tk {{ number_format($appointment->consultation_fee, 0) }}</strong>
                         </td>
                         <td>
                             <form action="{{ route('admin.appointments.update-status', $appointment) }}" method="POST" class="d-inline">
